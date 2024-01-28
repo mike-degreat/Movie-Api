@@ -34,3 +34,64 @@ function getMoviesFromStorage() {
     return movies;
 }
 
+function getMovieById(movieId) {
+    const movies = Movie.getMoviesFromStorage();
+    const movie = movies.find((movie) => movie.id === movieId);
+    return movie;
+}
+
+const movies = Movie.getMoviesFromStorage();
+console.log(movies);
+
+const moviesId = Movie.getMovieById(1);
+console.log(moviesId);
+
+const movie2 = new Movie(1, 'Aquaman', 'Sci-Fi', 2023, 90);
+console.log(movie2);
+
+//class for the user 
+class User {
+    constructor(id, name, email, rentedMovies = []) {
+      this.id = id;
+      this.name = name;
+      this.email = email;
+      this.rentedMovies = rentedMovies;
+    }
+}
+User.getUsersFromStorage = () => usersData.map(userData => new User(...Object.values(userData)));
+
+let johnDoe = User.getUsersFromStorage().find(user => user.name == "John Doe");
+johnDoe.addRentedMovie(movie2);
+
+console.log("Johns Rentals: ", johnDoe.rentedMovies);
+
+usersData.push({
+    id: 4,
+    name: "Emily Smith",
+    email: "emily@gmail.com"
+});
+
+let emilySmith = User.getUsersFromStorage().find(user => user.name == "Emily Smith")
+emilySmith.removeRental(movie2);
+
+console.log("Emilys Rentals after removing a rent: ", emilySmith.rentedMovies);
+
+
+
+class Rental {
+    constructor(userId, movieId, rentalDate, dueDate) {
+      this.userId = userId;
+      this.movieId = movieId;
+      this.rentalDate = rentalDate;
+      this.dueDate = dueDate;
+    }
+}
+
+//   get getAllMovies() {
+//     const movies = new getMoviesFromStorage();
+//     return movies;
+//   }
+
+function getUsersFromStorage() {
+    // Retrieve users from your chosen storage method
+}
