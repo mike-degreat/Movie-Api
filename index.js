@@ -95,3 +95,18 @@ class Rental {
 function getUsersFromStorage() {
     // Retrieve users from your chosen storage method
 }
+
+// API endpoints
+
+function rentMovie(userId, movieId) {
+    const movies = getMoviesFromStorage();
+    const users = getUsersFromStorage();
+  
+    const movie = movies.find((movie) => movie.id === movieId);
+    const user = users.find((user) => user.id === userId);
+  
+    if (movie.availableCopies > 0) {
+      movie.availableCopies--;
+      user.rentedMovies.push(movieId);
+    }
+}
